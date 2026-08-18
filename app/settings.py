@@ -27,7 +27,11 @@ SECRET_KEY = 'django-insecure-4xwatb(&3!tfmb(c=4$q&oyl7^$^0t_@9y8^$*!&#vja%2818w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'quiz-django-website-ynd4.vercel.app',
+]
 
 
 # Application definition
