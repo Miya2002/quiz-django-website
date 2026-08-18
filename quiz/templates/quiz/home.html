@@ -1,0 +1,265 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link href="{% static 'css/output.css' %}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        .text-brown {
+            color: #8B4513;
+        }
+
+        .bg-brown {
+            background-color: #8B4513;
+        }
+    </style>
+</head>
+
+<body class="text-white">
+
+    <!-- Navbar -->
+    <nav class="bg-blue-900   text-white">
+        <div class="container  mx-auto px-5 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center text-2xl font-semibold">
+                <span class="text-white"><img src="https://templates.hibootstrap.com/jovie/default/assets/img/logo.png"
+                        alt="Logo" class="mr-2" /></span>
+            </a>
+
+            <!-- Menu for Large Screens -->
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="{% url 'base' %}" class="text-red-500">Home <span class="text-sm">&#9662;</span></a>
+                <a href="#" class="hover:text-gray-300">About</a>
+                <a href="#" class="hover:text-gray-300">Jobs <span class="text-sm">&#9662;</span></a>
+                <a href="#" class="hover:text-gray-300">Candidates <span class="text-sm">&#9662;</span></a>
+                <a href="#" class="hover:text-gray-300">Pages <span class="text-sm">&#9662;</span></a>
+                <a href="#" class="hover:text-gray-300">Blog <span class="text-sm">&#9662;</span></a>
+                <a href="{% url 'contact' %}" class="hover:text-gray-300">Contact Us</a>
+            </div>
+
+            <!-- CTA Buttons -->
+            <div class="hidden md:flex space-x-4 justify-center items-center">
+
+                <a href="{% url 'base' %}">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Logout
+                    </button>
+                </a>
+            </div>
+
+            <!-- Hamburger Menu -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="menu" class="md:hidden hidden bg-[#0B0F29]">
+            <a href="#" class="block px-4 py-2 text-red-500">Home</a>
+            <a href="#" class="block px-4 py-2 hover:text-gray-300">About</a>
+            <a href="#" class="block px-4 py-2 hover:text-gray-300">Jobs</a>
+            <a href="#" class="block px-4 py-2 hover:text-gray-300">Candidates</a>
+            <a href="#" class="block px-4 py-2 hover:text-gray-300">Pages</a>
+            <a href="#" class="block px-4 py-2 hover:text-gray-300">Blog</a>
+            <a href="#" class="block px-4 py-2 hover:text-gray-300">Contact Us</a>
+            <a href="#" class="block px-4 py-2 text-white hover:underline">Sign Up</a>
+            <a href="#" class="block px-4 py-2 bg-red-500 text-center text-white rounded-md hover:bg-red-600">Sign
+                In</a>
+        </div>
+    </nav>
+
+    <div class="flex items-center justify-center ">
+        <div
+            class="flex space-y-4 bg-blue-300 flex-col md:flex-row items-center rounded-lg shadow-lg overflow-hidden p-6 md:p-12">
+            <!-- Left Content -->
+            <div class="text-center md:text-left md:flex-1">
+                <h1 class="text-4xl font-bold text-brown mb-4">Welcome,{{ candidate.name }}</h1>
+                <p class="text-white font-semibold mb-6">
+                    Welcome to the Psychology Quiz! This quiz will help you explore and understand different aspects of
+                    your personality. By answering a series of carefully crafted questions, you will gain insights into
+                    key psychological traits.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-x-4 sm:space-y-0">
+                    <!-- Start Quiz Button -->
+                    {% if not result_exists %}
+                    <a href="{% url 'quiz' %}" class="flex flex-col items-center">
+                        <div
+                            class="w-16 h-16 bg-brown text-white rounded-lg flex items-center justify-center transition duration-300 ease-in-out hover:bg-brown-dark">
+                            <!-- Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9M12 4h9M12 12h9M4 4h3v16H4z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-brown mt-2 text-lg font-semibold">Start Quiz</span>
+                    </a>
+                    {% endif %}
+
+                    <!-- View Reports Button -->
+                    <a href="{% url 'saved_reports' %}" class="flex flex-col items-center">
+                        <div
+                            class="w-16 h-16 bg-brown text-white rounded-lg flex items-center justify-center transition duration-300 ease-in-out hover:bg-brown-dark">
+                            <!-- Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 14V10a2 2 0 0 0-2-2h-4V4l-4 4h-4a2 2 0 0 0-2 2v4l-4 4h16l4-4z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-brown mt-2 text-lg font-semibold">View Reports</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Content -->
+            <div class="md:flex-1 mt-8 md:mt-0">
+                <div class="grid grid-cols-2 gap-4">
+                    <!-- Neuroticism -->
+                    <div class="relative group">
+                        <img src="{% static 'images/home5.jpg' %}" alt="Image 2"
+                            class="rounded-lg shadow-md w-[400px] h-[300px]">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white flex justify-center items-center p-4 text-lg font-bold">
+                            Neuroticism: A personality trait characterized by emotional instability, anxiety, mood
+                            swings, and irritability.
+                        </div>
+                    </div>
+
+                    <!-- Conscientiousness -->
+                    <div class="relative group">
+                        <img src="{% static 'images/conscientiousness psychology.jpg' %}" alt="Image 1"
+                            class="rounded-lg shadow-md w-[400px] h-[300px]">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white flex justify-center items-center p-4 text-lg font-bold">
+                            Conscientiousness: A trait related to being organized, responsible, and having a strong
+                            sense of duty.
+                        </div>
+                    </div>
+
+                    <!-- Agreeableness -->
+                    <div class="relative group">
+                        <img src="{% static 'images/home3.jpg' %}" alt="Image 3"
+                            class="rounded-lg shadow-md w-[400px] h-[300px]">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white flex justify-center items-center p-4 text-lg font-bold">
+                            Agreeableness: Characterized by kindness, cooperation, and empathy towards others.
+                        </div>
+                    </div>
+
+                    <!-- Extraversion -->
+                    <div class="relative group">
+                        <img src="{% static 'images/home4.jpg' %}" alt="Image 4"
+                            class="rounded-lg shadow-md w-[400px] h-[300px]" style="transform: scaleX(-1);">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 text-white flex justify-center items-center p-4 text-lg font-bold">
+                            Extraversion: A personality trait involving sociability, enthusiasm, and assertiveness.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-900 text-white pt-12 pb-8">
+        <div class="container mx-auto px-6 md:px-16">
+            <!-- Main Footer Content -->
+            <div class="flex flex-col md:flex-row md:justify-between">
+                <!-- Company Info -->
+                <div class="mb-8 md:mb-0 md:w-1/3">
+                    <h2 class="text-2xl font-bold mb-4">Cariera</h2>
+                    <p class="text-gray-400 mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting
+                        industry.</p>
+                    <div class="space-y-2 text-gray-400">
+                        <p>📍 New York City, USA</p>
+                        <p>📞 (123) 456 789 0012</p>
+                        <p>✉ <a href="mailto:youremail@cariera.com" class="hover:underline">youremail@cariera.com</a>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Useful Links -->
+                <div class="mb-8 md:mb-0 md:w-1/4">
+                    <h3 class="text-xl font-semibold mb-4">Useful Links</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white">Add Job</a></li>
+                        <li><a href="#" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Find Jobs</a></li>
+                        <li><a href="#" class="hover:text-white">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white">Login</a></li>
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Register</a></li>
+                        <li><a href="#" class="hover:text-white">Submit Resume</a></li>
+                    </ul>
+                </div>
+
+                <!-- Popular Posts -->
+                <div class="mb-8 md:mb-0 md:w-1/4">
+                    <h3 class="text-xl font-semibold mb-4">Popular Posts</h3>
+                    <ul class="space-y-4">
+                        <li>
+                            <p class="font-medium">Blog Post 1</p>
+                            <p class="text-gray-400 text-sm">1 day ago</p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Blog Post 2</p>
+                            <p class="text-gray-400 text-sm">2 days ago</p>
+                        </li>
+                        <li>
+                            <p class="font-medium">Blog Post 3</p>
+                            <p class="text-gray-400 text-sm">4 days ago</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="md:w-1/4">
+                    <h3 class="text-xl font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Lorem Ipsum is simply dummy text of the printing industry.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your Email"
+                            class="w-full px-4 py-2 text-gray-700 rounded-l focus:outline-none" />
+                        <button class="bg-blue-500 hover:bg-blue-700 px-4 text-white rounded-r">SUBMIT</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Helpline -->
+            <div class="mt-10">
+                <div class="flex flex-col md:flex-row items-center bg-blue-500 p-4 rounded shadow-lg">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9us0MxB35Wv3z03TJFrxhub-WyxqpBKAsjQ&s"
+                        alt="Agent" class="rounded-full mb-4 md:mb-0 md:mr-4 w-16  h-20">
+                    <div>
+                        <p class="font-bold">Helpline Center</p>
+                        <p class="text-sm">Chat Live now! Hello, my name is John Doe, how may I help you?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="text-center mt-12 border-t border-gray-700 pt-6">
+            <p class="text-gray-400">&copy; 2024 Cariera. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const menu = document.getElementById('menu');
+
+        menuBtn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+
+</html>
