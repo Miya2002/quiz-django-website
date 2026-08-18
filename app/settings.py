@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-4xwatb(&3!tfmb(c=4$q&oyl7^$^0t_@9y8^$*!&#vja%2818w'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
@@ -33,6 +33,9 @@ ALLOWED_HOSTS = [
     'quiz-django-website-ynd4.vercel.app',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://quiz-django-website-ynd4.vercel.app',
+]
 
 # Application definition
 
