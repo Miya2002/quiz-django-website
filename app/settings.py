@@ -34,10 +34,12 @@ ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'quiz-django-website-ynd4.vercel.app',
+    '.vercel.app',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'https://quiz-django-website-ynd4.vercel.app',
+    'https://*.vercel.app',
 ]
 
 # Application definition
